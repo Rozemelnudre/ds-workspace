@@ -1,16 +1,16 @@
 #include <string>
 #include <iostream>
 #include <sstream>
-#include "PeriodicStrings.h"
+#include "Periodic.h"
 
 using namespace ds_course;
 using namespace std;
 
-PeriodicStrings::PeriodicStrings() {
+Periodic::Periodic() {
 
 }
 
-bool PeriodicStrings::isPeriodic(int number)
+bool Periodic::isPeriodic(int number)
 {
     int *digits = new int[20];
     int count = 0;
@@ -32,7 +32,7 @@ bool PeriodicStrings::isPeriodic(int number)
 }
 
 
-bool PeriodicStrings::isPeriodic(std::string word) {
+bool Periodic::isPeriodic(std::string word) {
     int count = word.length();
     if (count == 0) {
         return true;
