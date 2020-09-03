@@ -10,39 +10,41 @@ Periodic::Periodic() {
 
 }
 
-bool Periodic::isPeriodic(int number)
+int Periodic::findPeriod(int number)
 {
-    int *digits = new int[20];
-    int count = 0;
-    for (int i = 0;; i++) {
-        digits[i] = number % 10;
-        number = number / 10; 
-        if (number == 0) {
-            break;
-        }
-        count++;
+    return 17;
+}
+
+
+int Periodic::findPeriod(std::string word) {
+    // calculate half of string length, if odd, calculate 'smallest' value
+    int maxPeriod;
+    if (word.length() % 2 != 0) {
+        maxPeriod = (word.length() - 1) / 2;
     }
-    //cout << "  count in isPeriodic(" << number << ") = " << count << endl;
-    for (int j = 0; j < count; j++) {
-        if (digits[j] != digits[count-j]) {
-            return false;
+    else {
+        maxPeriod = word.length() / 2;
+    }
+    //if length is 0, maxPeriod is 0 and not periodic
+    if (maxPeriod == 0) {
+        return 0;
+    }
+    //loop through all possible period lengths
+    for (int j = 0; j <= maxPeriod; j++) {
+        //check if divisible by this period. If not, move on, if yes keep going
+        if (word.length() % j == 0) {
+            //use a for loop to iterate over the string and split it
+            //then compare all the parts
+        }
+        
+
         }
     }
     return true;
 }
 
-
-bool Periodic::isPeriodic(std::string word) {
-    int count = word.length();
-    if (count == 0) {
-        return true;
-    }
-    for (int j = 0; j < count; j++) {
-        if (word.at(j) != word.at((count-1)-j)) {
-            return false;
-        }
-    }
-    return true;
+int Periodic::findPeriodHex(int n) {
+    return 17;
 }
 
 

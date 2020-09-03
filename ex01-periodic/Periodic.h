@@ -6,8 +6,9 @@ namespace ds_course
     {
     public:
     Periodic(); 
-    bool isPeriodic(int number);
-    bool isPeriodic(std::string word);
+    int findPeriod(std::string str);
+    int findPeriod(int n);
+    int findPeriodHex(int n);
     };
 }
 

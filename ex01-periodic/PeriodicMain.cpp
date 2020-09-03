@@ -28,11 +28,11 @@ int main()
         else {
             if (mode == "dec") {
                 sstr >> inputDec;            
-                bool res = pal.isPeriodic(inputDec);
+                bool res = pal.findPeriod(inputDec);
                 cout << inputDec << " " << res << endl;
             } else if (mode == "str") {
                 sstr >> inputString;
-                bool res = pal.isPeriodic(inputString);
+                bool res = pal.findPeriod(inputString);
                 cout << inputString << " " << res << endl;
             }
         }
