@@ -2,10 +2,10 @@
 
 namespace ds_course
 {
-    class PeriodicStrings
+    class Periodic
     {
     public:
-    PeriodicStrings(); 
+    Periodic(); 
     bool isPeriodic(int number);
     bool isPeriodic(std::string word);
     };

@@ -2,14 +2,14 @@
 #include <vector>
 #include <string>
 #include <sstream>
-#include "PeriodicStrings.h"
+#include "Periodic.h"
 
 using namespace std;
 using namespace ds_course;
 
 int main()
 {    
-    PeriodicStrings pal;
+    Periodic pal;
     string mode;
     cin >> mode;
     string inputString;
