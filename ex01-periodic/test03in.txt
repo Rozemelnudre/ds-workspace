@@ -1,0 +1,9 @@
+dec
+# [A1] Correctly determines period of value 1
+00017017
+# [A2] Correctly identifies a period of value 2
+20099
+# [A3] non-periodic 	
+20192019
+# [A4] non-periodic
+222222

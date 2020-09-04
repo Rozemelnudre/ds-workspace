@@ -1,0 +1,14 @@
+ 0
+a 0
+bb 1
+ab 0
+abba 0
+abcba 0
+aise 0
+abcde 0
+a..a 0
+sapalsaritadedatiraslapas 0
+saippuakivikauppias 0
+anna_anna 0
+self/less 0
+one;two;one 0
