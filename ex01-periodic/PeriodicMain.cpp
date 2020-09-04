@@ -26,13 +26,9 @@ int main()
             continue;
         }
         else {
-            if (mode == "dec") {
-                sstr >> inputDec;            
-                bool res = pal.findPeriod(inputDec);
-                cout << inputDec << " " << res << endl;
-            } else if (mode == "str") {
-                sstr >> inputString;
-                bool res = pal.findPeriod(inputString);
+            if (mode == "str") {
+                 sstr >> inputString;
+                int res = pal.findPeriod(inputString);
                 cout << inputString << " " << res << endl;
             }
         }

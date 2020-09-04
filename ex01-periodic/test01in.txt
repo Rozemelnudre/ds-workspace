@@ -1,15 +1,13 @@
-dec 
-# [A1] Correctly reports that a single digit number is a palindrome
-3
-# [A2] Correctly identifies a 2-digit palindrome
-44
-# [A3] Correctly identifies a 2-digit non-palindrome 	
-17
-# [A4] Correctly identifies a 2n-digit palindrome
-1221
-# [A5] Correctly identifies a 2n+1-digit palindrome
-12321
-# [A6] Correct identifies a 2n-digit non-palindrome
-1222
-# [A7] Correctly identifies a 2n+1-digit non-palindrome
-12322
+str
+# [A1] Correctly determines period of value 1
+aaaaaaaaaa
+# [A2] Correctly identifies a period of value 2
+ababababababab
+# [A3] non-periodic 	
+abababababababa
+# [A4] non-periodic
+aaaaaaaaaaaaaaaaaaab
+# [A5] Correctly identifies a period of 3
+ABCABCABC
+# [A6] non-periodic
+ABCD 0
