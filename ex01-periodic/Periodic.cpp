@@ -16,10 +16,6 @@ int Periodic::findPeriod(std::string word) {
   int firstInd = 0;
   int secondInd = 1; 
 
-  if(word.size() == 0){
-    period = 0;
-  } 
-
  	while(secondInd < word.size()){ 
  		if(word[firstInd] == word[secondInd]) 
  			firstInd++; 
