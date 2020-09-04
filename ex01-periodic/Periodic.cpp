@@ -31,9 +31,11 @@ int Periodic::findPeriod(std::string word) {
 		} 
  		secondInd++; 
  	} 
- 	if((secondInd-firstInd) != word.size() && word.size() % (secondInd-firstInd) == 0){ 
+ 	if((secondInd-firstInd) != word.size() && word.size() % (secondInd-firstInd) == 0 && word.size() != 0){ 
         period = secondInd-firstInd;
- 	} 
+ 	}else {
+		period = 0;
+	 }
   return period;
 }
 
