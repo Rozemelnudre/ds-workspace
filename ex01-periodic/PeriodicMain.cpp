@@ -14,7 +14,7 @@ int main()
     string mode;
     cin >> mode;
     string inputString;
-    int inputDec;
+    long long int inputDec;
     string inputHex;
 
     //cout << '\'' << mode << '\'' << endl;
@@ -28,11 +28,11 @@ int main()
         }
         else {
             if (mode == "str") {
-                 sstr >> inputString;
+                sstr >> inputString;
                 int res = pal.findPeriod(inputString);
                 cout << inputString << " " << res << endl;
             } else if (mode == "hex") {
-                 sstr >> inputHex;
+                sstr >> inputHex;
                 for (int i=0; i<inputHex.length(); i++){
                     inputHex[i] = tolower(inputHex[i]);
                 }

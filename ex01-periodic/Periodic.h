@@ -7,8 +7,8 @@ namespace ds_course
     public:
     Periodic(); 
     int findPeriod(std::string str);
-    int findPeriodHex(std::string str);
-    int findPeriod(int n);
+    int findPeriodHex(long long int n);
+    int findPeriod(long long int n);
     };
 }
 
