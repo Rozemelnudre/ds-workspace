@@ -37,8 +37,8 @@ int Periodic::findPeriod(std::string word) {
   return period;
 }
 
-int Periodic::findPeriodHex(long long int number) {	
-  string word = to_string(number);
+int Periodic::findPeriodHex(string word) {	
+
   int period = 0;
   int firstInd = 0;
   int secondInd = 1; 
