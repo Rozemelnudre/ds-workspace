@@ -2,14 +2,13 @@
 
 namespace ds_course
 {
-    class Students
+    class Student
     {
     public:
-    Students(); 
+    Student(); 
     int age;
     double height;
-    int findPeriod(std::string str);
-    int findPeriodHex(std::string n);
+    int compareTo(Student ss);
     };
 }
 

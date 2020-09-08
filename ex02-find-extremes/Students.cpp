@@ -8,8 +8,23 @@
 using namespace ds_course;
 using namespace std;
 
-Students::Students() {
+Student::Student() {
 
 }
 
 
+int Student::compareTo(Student ss){
+    if (age == ss.age){
+        if (height == ss.height){
+            return 0;
+        }else if (height < ss.height){
+            return -1;
+        }else {return 1;}
+
+    }else if(age - ss.age < 0){
+        return -1;
+    } else {
+        return 1;
+    }
+
+}
