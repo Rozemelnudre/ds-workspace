@@ -4,17 +4,19 @@
 #include <sstream>
 #include <ctype.h>
 #include "Students.h"
+#include <iomanip>
 
 using namespace std;
 using namespace ds_course;
-
+Student getMin(Student *ss, int count);
+Student getMax(Student *ss, int count);
 int main()
 
 {    
     int count;
     cin >> count;
     Student stdts[count] = {};
-    string temp = "";
+    string temp;
     string tempage = "";
     string tempheight = "";
     double height;
@@ -33,20 +35,8 @@ int main()
             continue;
         }
         else {
-           sstr >> temp;
-
-           for (int j = 0; j < temp.length(); j++){
-               if (isspace(temp[j])){
-                   delimiter = j;
-               }
-               break;
-           }
-
-            tempage = temp.substr(0,2);
-            tempheight = temp.substr(2);
-
-            std::istringstream ( tempage ) >> age;
-            std::istringstream ( tempheight ) >> height;
+           sstr >> age;
+           sstr >> height;
 
             Student newbie;
             newbie.age = age;
@@ -62,30 +52,29 @@ int main()
     Student maxStudent = getMax(stdts,count);
     Student minStudent = getMin(stdts, count);
 
-    cout << minStudent.age << " " << minStudent.height << endl;
-    cout << maxStudent.age << " " << maxStudent.height << endl;
+   
+    cout << maxStudent.age << " " << fixed << setprecision(5) << maxStudent.height << endl;
+    cout << minStudent.age << " " << fixed << setprecision(5) << minStudent.height << endl;
     return 0;
 }
 
 Student getMin(Student *ss, int count){
-    Student group[count] = *ss;
-    Student minimum = group[0];
+    Student minimum = ss[0];
 
     for (int i = 1; i < count; i++){
-        if(minimum.compareTo(group[1]) == -1){
-            minimum = group[i];
+        if(minimum.compareTo(ss[1]) == -1){
+            minimum = ss[i];
         }
     }
     return minimum;
 }
 
 Student getMax(Student *ss, int count){
-    Student group[count] = *ss;
-    Student maximum = group[0];
+    Student maximum = ss[0];
 
     for (int i = 1; i < count; i++){
-        if(maximum.compareTo(group[1]) == -1){
-            maximum = group[i];
+        if(maximum.compareTo(ss[1]) == 1){
+            maximum = ss[i];
         }
     }
     return maximum;
