@@ -9,6 +9,7 @@ using namespace std;
 using namespace ds_course;
 
 int main()
+
 {    
     int count;
     cin >> count;
@@ -53,12 +54,40 @@ int main()
 
             stdts[studentcounter] = newbie;
             studentcounter++;
-
-
+            
            
         }
     }
+
+    Student maxStudent = getMax(stdts,count);
+    Student minStudent = getMin(stdts, count);
+
+    cout << minStudent.age << " " << minStudent.height << endl;
+    cout << maxStudent.age << " " << maxStudent.height << endl;
+    return 0;
 }
 
+Student getMin(Student *ss, int count){
+    Student group[count] = *ss;
+    Student minimum = group[0];
 
+    for (int i = 1; i < count; i++){
+        if(minimum.compareTo(group[1]) == -1){
+            minimum = group[i];
+        }
+    }
+    return minimum;
+}
+
+Student getMax(Student *ss, int count){
+    Student group[count] = *ss;
+    Student maximum = group[0];
+
+    for (int i = 1; i < count; i++){
+        if(maximum.compareTo(group[1]) == -1){
+            maximum = group[i];
+        }
+    }
+    return maximum;
+}
 
