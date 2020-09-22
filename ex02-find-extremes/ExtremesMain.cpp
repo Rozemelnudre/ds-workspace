@@ -3,7 +3,7 @@
 #include <string>
 #include <sstream>
 #include <ctype.h>
-#include "Students.h"
+#include "Student.h"
 #include <iomanip>
 
 using namespace std;

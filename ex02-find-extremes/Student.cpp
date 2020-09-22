@@ -3,7 +3,7 @@
 #include <vector>
 #include <ctype.h>
 #include <string>
-#include "Students.h"
+#include "Student.h"
 
 using namespace ds_course;
 using namespace std;
