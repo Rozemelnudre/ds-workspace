@@ -4,7 +4,7 @@
 #include <sstream>
 #include <ctype.h>
 #include <iomanip>
-#include "MirrorTrees.h"
+#include "MirrorTrees.cpp"
 
 using namespace std;
 using namespace ds_course;
