@@ -10,10 +10,11 @@ struct Node{
     public:
         Node(int vv);
         void addChild(Node nn);
-        void reflect();
-        void printPreorder();
+        void reflectChildren();
+        Node getPreorder(Node nn);
         int getVal();
         vector<int> getChildren();
+        vector<int> sortArr;
 
 };
 }
