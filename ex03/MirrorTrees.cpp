@@ -21,25 +21,25 @@ int Node::getVal(){
 
 vector<int> Node::getChildren(){
     vector<int> returnVector;
-    for (int i = 0; i < (this->children).size(); i++){
-        returnVector.push_back(this->children[i].val);
+    for (int i = 0; i < this->children.size(); i++){
+        returnVector.push_back(this->children[i]->getVal());
     }
 
     return returnVector;
 }
 
-void Node::addChild(Node child){
+void Node::addChild(Node* child){
     this->children.push_back(child);
 }
 
 void Node::reflectChildren(){
     int size = this->children.size();
-    Node temp(8);
+    Node* temp = NULL;
 
     if(size % 2 == 0){
         
         for(int i = 0; i < size / 2; i++){
-            temp = this->children[i];
+            temp = this->children.at(i);
             this->children[i] = this->children[size-i];
             this->children[size-i] = temp;
         }
@@ -53,13 +53,38 @@ void Node::reflectChildren(){
     }
 }
 
-Node Node::getPreorder(Node nade){
-    nade.sortArr.push_back(nade.val);
-    int count = this->children.size();
+void Node::getPreorder(){
+    cout << this->getVal() << " " ;
+    this->printChildren();
+
+    vector<Node*> children = this->getChildNodes();
+    int count = children.size();
     for (int i = 0; i < count; i++){
-       nade.sortArr.push_back(getPreorder(nade.children[i]).getVal());
+        if(!children[i]->getChildren().empty()){
+            children[i]->getPreorder();
+        }
     }
+
+    cout << 0 << endl;
     
+}
+
+void Node::printChildren(){
+    vector<int> children = this->getChildren();
+    int size = children.size();
+
+    for (int i = 0; i < size; i++){
+        if(i == size -1){
+         cout << children[i] << endl;   
+        }else{
+            cout << children[i] << " ";
+        }
+        
+    }
+}
+
+vector<Node*> Node::getChildNodes(){
+    return this->children;
 }
 
 

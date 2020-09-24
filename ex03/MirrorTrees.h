@@ -6,14 +6,16 @@ namespace ds_course{
 struct Node{
     private:
         int val;
-        vector<Node> children;
+        vector<Node*> children;
     public:
         Node(int vv);
-        void addChild(Node nn);
+        void addChild(Node* nn);
         void reflectChildren();
-        Node getPreorder(Node nn);
+        void getPreorder();
+        void printChildren();
         int getVal();
         vector<int> getChildren();
+        vector<Node*> getChildNodes();
         vector<int> sortArr;
 
 };
