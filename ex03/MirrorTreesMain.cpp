@@ -5,7 +5,9 @@
 #include <ctype.h>
 #include <iomanip>
 #include <map>
+#include <set>
 #include <iterator>
+#include <algorithm>
 #include "MirrorTrees.cpp"
 
 using namespace std;
@@ -13,36 +15,72 @@ using namespace ds_course;
 
 int main(){  
 
-    map<int,Node*> nodemap;
-    cout << "hello" << endl;
-    Node n1(13);
-    cout<< "node has val" << n1.getVal() << endl;  
+    Node* root = NULL;
+    Node* parent = NULL;
+    Node* child = NULL;
+
+    bool isParent = true;
+
+    map<int,Node*> nodemap; 
     vector<int> parents;
+    vector<int> children;
     string line;
-    int linecounter = 0;
+
+    int currentnode;
+    
     while(getline(cin, line)){
         istringstream treeline(line);
-        int currentnode;
-        int counter = 0;
 
         while(treeline >> currentnode){
             if(currentnode == 0){
                 break;
             }
-            if(counter == 0){
-                Node* parent = new Node(currentnode);
-                nodemap.insert({currentnode, parent});
-                parents.push_back(currentnode);
+
+
+            if(isParent){
+
+                
+
+                /*jauns node jātaisa tikai tad, ja jau neeksistē viens!*/
+
+                if(nodemap.find(currentnode) == nodemap.end()){
+                     
+                  parent = new Node(currentnode);
+                   nodemap.insert({currentnode, parent}); 
+                   parents.push_back(currentnode);
+                }else{
+                     
+                    parent = nodemap.at(currentnode);
+                }
+                isParent = false;
+                  
             }else{
-                Node* child = new Node(currentnode);
-                nodemap.at(parents.at(linecounter))->addChild(child);
+                 
+                child = new Node(currentnode);
+                parent->addChild(child);
+                 
+                nodemap.insert({currentnode, child});
+                children.push_back(currentnode);
 
             }
-            counter++;
+            
         }
-
-        linecounter++;
+        isParent = true;
+       
     }
+
+
+
+    for(int j = 0; j < parents.size(); j++){
+        if(find(children.begin(), children.end(), parents.at(j)) != children.end() == false){
+            root = nodemap.at(parents.at(j));
+        }
+    }
+
+
+    root->getPreorder();
+    cout << 0 << endl;
+    
 }
 
 

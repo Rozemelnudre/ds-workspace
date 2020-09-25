@@ -22,7 +22,7 @@ int Node::getVal(){
 vector<int> Node::getChildren(){
     vector<int> returnVector;
     for (int i = 0; i < this->children.size(); i++){
-        returnVector.push_back(this->children[i]->getVal());
+        returnVector.push_back(this->children.at(i)->getVal());
     }
 
     return returnVector;
@@ -33,39 +33,27 @@ void Node::addChild(Node* child){
 }
 
 void Node::reflectChildren(){
-    int size = this->children.size();
-    Node* temp = NULL;
+    reverse(children.begin(), children.end());
 
-    if(size % 2 == 0){
-        
-        for(int i = 0; i < size / 2; i++){
-            temp = this->children.at(i);
-            this->children[i] = this->children[size-i];
-            this->children[size-i] = temp;
-        }
-
-    }else if(size % 2 == 1){
-          for(int i = 0; i < (size - 1) / 2; i++){
-            temp = this->children[i];
-            this->children[i] = this->children[size-i];
-            this->children[size-i] = temp;
-        }
-    }
 }
 
 void Node::getPreorder(){
+
+    this->reflectChildren();
+
     cout << this->getVal() << " " ;
     this->printChildren();
+    
 
     vector<Node*> children = this->getChildNodes();
+    
     int count = children.size();
     for (int i = 0; i < count; i++){
-        if(!children[i]->getChildren().empty()){
-            children[i]->getPreorder();
+        if(!children.at(i)->getChildren().empty()){
+
+            children.at(i)->getPreorder();
         }
     }
-
-    cout << 0 << endl;
     
 }
 
@@ -75,9 +63,9 @@ void Node::printChildren(){
 
     for (int i = 0; i < size; i++){
         if(i == size -1){
-         cout << children[i] << endl;   
+         cout << children.at(i) << endl;   
         }else{
-            cout << children[i] << " ";
+            cout << children.at(i) << " ";
         }
         
     }
