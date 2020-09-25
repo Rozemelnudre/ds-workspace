@@ -4,7 +4,7 @@
 #include <ctype.h>
 #include <string>
 #include <algorithm>
-#include "MirrorTrees.h"
+#include "Node.h"
 
 
 using namespace std;
