@@ -47,19 +47,27 @@ int main(){
                      
                   parent = new Node(currentnode);
                    nodemap.insert({currentnode, parent}); 
-                   parents.push_back(currentnode);
+                   
                 }else{
                      
                     parent = nodemap.at(currentnode);
                 }
                 isParent = false;
+                parents.push_back(currentnode);
                   
             }else{
                  
-                child = new Node(currentnode);
+                 if(nodemap.find(currentnode) == nodemap.end()){
+                    child = new Node(currentnode); 
+                    nodemap.insert({currentnode, child});
+                 }else{
+                     child = nodemap.at(currentnode);
+                 }
+
+                
                 parent->addChild(child);
                  
-                nodemap.insert({currentnode, child});
+                
                 children.push_back(currentnode);
 
             }
