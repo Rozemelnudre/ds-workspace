@@ -49,12 +49,15 @@ int main()
         }
     }
 
+
     Student maxStudent = getMax(stdts,count);
+
     Student minStudent = getMin(stdts, count);
 
    
-    cout << maxStudent.age << " " << fixed << setprecision(5) << maxStudent.height << endl;
     cout << minStudent.age << " " << fixed << setprecision(5) << minStudent.height << endl;
+    cout << maxStudent.age << " " << fixed << setprecision(5) << maxStudent.height << endl;
+    
     return 0;
 }
 
@@ -62,7 +65,7 @@ Student getMin(Student *ss, int count){
     Student minimum = ss[0];
 
     for (int i = 1; i < count; i++){
-        if(minimum.compareTo(ss[1]) == -1){
+        if(minimum.compareTo(ss[i]) == 1){
             minimum = ss[i];
         }
     }
@@ -73,7 +76,7 @@ Student getMax(Student *ss, int count){
     Student maximum = ss[0];
 
     for (int i = 1; i < count; i++){
-        if(maximum.compareTo(ss[1]) == 1){
+        if(maximum.compareTo(ss[i]) == -1){
             maximum = ss[i];
         }
     }
