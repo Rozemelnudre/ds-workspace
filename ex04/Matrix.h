@@ -68,4 +68,80 @@ bool ds_course::Matrix<T>::operator==(const ds_course::Matrix<T> &rhs)
     return true;
 }
 
+template <class T>
+ds_course::Matrix<T> ds_course::Matrix<T>::operator+(const ds_course::Matrix<T> &rhs){
+    if (rows != rhs.rows)
+    {
+        throw std::out_of_range("row counts differ");
+    }
+    if (cols != rhs.cols)
+    {
+        throw std::out_of_range("col counts differ");
+
+    }
+
+    rowss = getRows();
+    colss = getCols();
+
+    ds_course::Matrix<T> retmat(rowss, colss);
+
+    for( int i = 0; i < rowss; i++){
+        for (int j = 0; j < colss; j++){
+            retmat.a[i][j] = a[i][j] + rhs.a[i][j];
+        }
+    }
+
+    return retmat;
+}
+
+template <class T>
+ds_course::Matrix<T> ds_course::Matrix<T>::operator-(const ds_course::Matrix<T> &rhs){
+    if (rows != rhs.rows)
+    {
+        throw std::out_of_range("row counts differ");
+    }
+    if (cols != rhs.cols)
+    {
+        throw std::out_of_range("col counts differ");
+
+    }
+
+    rowss = getRows();
+    colss = getCols();
+
+    ds_course::Matrix<T> retmat(rowss, colss);
+
+    for( int i = 0; i < rowss; i++){
+        for (int j = 0; j < colss; j++){
+            retmat.a[i][j] = a[i][j] - rhs.a[i][j];
+        }
+    }
+
+    return retmat;
+}
+
+template <class T>
+ds_course::Matrix<T> ds_course::Matrix<T>::operator*(const ds_course::Matrix<T> &rhs){
+    if (cols != rhs.rows)
+    {
+        throw std::out_of_range("the column and row counts differ");
+
+    }
+
+    rowss = getRows();
+    colss = rhs.cols;
+
+    ds_course::Matrix<T> retmat(rowss, colss);
+
+    for( int i = 0; i < rowss; i++){
+        for (int j = 0; j < colss; j++){
+            for(int k = 0; k < getCols(); k++){
+                retmat.a[i][j] += a[i][k] * rhs.a[k][j];
+            }
+        }
+    }
+
+    return retmat;
+}
+
 #endif /* DS_MATRIX_H */
