@@ -27,21 +27,37 @@ int main(){
     sstr >> matrixType1;
     sstr >> rows1;
     sstr >> cols1;
-    cout << "read first things " << matrixType1 << " " << rows1 << " " << cols1 << endl;
 
     if(matrixType1 == "MZ"){
         int elem;
         Matrix<int> m1(rows1, cols1);
-        cin >> m1;
+        
+        for(int i = 0; i < rows1; i++){
+            getline(cin, firstLine);
+            istringstream sstr(firstLine);
+            for(int j = 0; j < cols1; j++){
+                sstr >> elem;
+                m1.a[i][j]= elem;
+            }
+        }
 
         getline(cin, firstLine);
         istringstream sstr(firstLine);
         sstr >> matrixType2;
-        sstr >> rows2;
+        sstr >> rows2; 
         sstr >> cols2;
 
+ 
+
         Matrix<int> m2(rows2, cols2);
-        cin >> m2;
+           for(int k = 0; k < rows2; k++){
+            getline(cin, firstLine);
+            istringstream sstr(firstLine);
+            for(int m = 0; m < cols2; m++){
+                sstr >> elem;
+                m2.a[k][m]= elem;
+            }
+        }
 
         string operation;
         cin >> operation;
@@ -80,23 +96,40 @@ int main(){
         
 
     }else if(matrixType1 == "MQ"){
-         int elem;
+        Ratio elem;
         Matrix<Ratio> m1(rows1, cols1);
-        cin >> m1;
+
+        
+        for(int i = 0; i < rows1; i++){
+            getline(cin, firstLine);
+            istringstream sstr(firstLine);
+            for(int j = 0; j < cols1; j++){
+                sstr >> elem;
+                m1.a[i][j]= elem;
+            }
+        }
+
 
         getline(cin, firstLine);
         istringstream sstr(firstLine);
         sstr >> matrixType2;
-        sstr >> rows2;
+        sstr >> rows2; 
         sstr >> cols2;
 
+
         Matrix<Ratio> m2(rows2, cols2);
-        cin >> m2;
+           for(int k = 0; k < rows2; k++){
+            getline(cin, firstLine);
+            istringstream sstr(firstLine);
+            for(int m = 0; m < cols2; m++){
+                sstr >> elem;
+                m2.a[k][m]= elem;
+            }
+        }
 
         string operation;
         cin >> operation;
-
-        if(operation == "ADD"){
+        if(operation.compare("ADD") == 0){
 
             try{
                 Matrix<Ratio> result = m1 + m2;
@@ -106,7 +139,7 @@ int main(){
                 cout << "out_of_range" << endl;
             }
             
-        }else if(operation == "SUB"){
+        }else if(operation.compare("SUB") == 0){
             
             try{
                 Matrix<Ratio> result = m1 - m2;
@@ -116,7 +149,7 @@ int main(){
                 cout << "out_of_range" << endl;
             }
 
-        }else if(operation == "MUL"){
+        }else if(operation.compare("MUL") == 0){
             
             try{
                 Matrix<Ratio> result = m1 * m2;
@@ -129,22 +162,38 @@ int main(){
         }
         
     }else if(matrixType1 == "MR"){
-         int elem;
+        double elem;
         Matrix<double> m1(rows1, cols1);
-        cin >> m1;
+        
+        for(int i = 0; i < rows1; i++){
+            getline(cin, firstLine);
+            istringstream sstr(firstLine);
+            for(int j = 0; j < cols1; j++){
+                sstr >> elem;
+                m1.a[i][j]= elem;
+            }
+        }
+
 
         getline(cin, firstLine);
         istringstream sstr(firstLine);
         sstr >> matrixType2;
-        sstr >> rows2;
+        sstr >> rows2; 
         sstr >> cols2;
 
+
         Matrix<double> m2(rows2, cols2);
-        cin >> m2;
+           for(int k = 0; k < rows2; k++){
+            getline(cin, firstLine);
+            istringstream sstr(firstLine);
+            for(int m = 0; m < cols2; m++){
+                sstr >> elem;
+                m2.a[k][m]= elem;
+            }
+        }
 
         string operation;
         cin >> operation;
-
         if(operation == "ADD"){
 
             try{

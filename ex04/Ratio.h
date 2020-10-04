@@ -47,6 +47,12 @@ namespace ds_course
 // THe DEFINITIONS of your member functions and friends....
 int ds_course::Ratio::gcd(int a, int b)
 {
+    if(a < 0){
+        a = -a;
+    }
+    if(b < 0){
+        b = -b;
+    }
 
     if(a == 0){
         return b;
