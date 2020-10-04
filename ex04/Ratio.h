@@ -20,6 +20,11 @@ namespace ds_course
         Ratio(int nn = 0, int dd = 1);
         Ratio operator+(const Ratio &rhs);
         bool operator==(const Ratio &rhs);
+        Ratio operator-(const Ratio &rhs);
+        Ratio operator*(const Ratio &rhs);
+        Ratio operator/(const Ratio &rhs);
+        bool operator>(const Ratio &rhs);
+        bool operator<(const Ratio &rhs);
 
         friend std::ostream &operator<<(std::ostream &oStream, const Ratio &rat)
         {
@@ -45,6 +50,7 @@ int ds_course::Ratio::gcd(int a, int b)
     return 1; // stubs,
 }
 
+
 ds_course::Ratio::Ratio(int nn, int dd) : num(nn), den(dd)
 {
     int g = gcd(nn, dd);
@@ -64,6 +70,52 @@ ds_course::Ratio ds_course::Ratio::operator+(const ds_course::Ratio &rhs)
     int downside = den * rhs.den;
     ds_course::Ratio result(upside, downside);
     return result;
+}
+
+ds_course::Ratio ds_course::Ratio::operator-(const ds_course::Ratio &rhs)
+{
+    int upside = num * rhs.den - den * rhs.num;
+    int downside = den * rhs.den;
+    ds_course::Ratio result(upside, downside);
+    return result;
+}
+
+ds_course::Ratio ds_course::Ratio::operator*(const ds_course::Ratio &rhs)
+{
+    int upside = num * rhs.num;
+    int downside = den * rhs.den;
+    ds_course::Ratio result(upside, downside);
+    return result;
+}
+
+ds_course::Ratio ds_course::Ratio::operator/(const ds_course::Ratio &rhs)
+{
+    int upside = num * rhs.den ;
+    int downside = den * rhs.num;
+    ds_course::Ratio result(upside, downside);
+    return result;
+}
+
+bool ds_course::Ratio::operator<(const ds_course::Ratio &rhs)
+{
+    int lcm = gcd(den, rhs.den);
+    int multiple1 = lcm / den;
+
+    int multiple2 = lcm / rhs.den;
+
+    return(num * multiple1 < rhs.num * multiple2);
+
+
+}
+
+bool ds_course::Ratio::operator>(const ds_course::Ratio &rhs)
+{
+    int lcm = gcd(den, rhs.den);
+    int multiple1 = lcm / den;
+
+    int multiple2 = lcm / rhs.den;
+
+    return(num * multiple1 > rhs.num * multiple2);
 }
 
 bool ds_course::Ratio::operator==(const ds_course::Ratio &r) {    
