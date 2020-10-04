@@ -31,6 +31,20 @@ namespace ds_course
                     input >> m.a[i][j];
             return input;
         }
+
+        friend std::ostream &operator<<(std::ostream &oStream, ds_course::Matrix<T> &m){
+            for (int i = 0; i < m.getRows(); i++){
+                for (int j = 0; j < m.getCols(); j++){
+                    oStream << m.a[i][j];
+                    if(j != m.getCols() - 1){
+                        oStream << " ";
+                    }
+                }
+                oStream << std::endl; 
+            }  
+            return oStream;
+        }
+
     };
 } // namespace ds_course
 
@@ -80,8 +94,8 @@ ds_course::Matrix<T> ds_course::Matrix<T>::operator+(const ds_course::Matrix<T> 
 
     }
 
-    rowss = getRows();
-    colss = getCols();
+    int rowss = getRows();
+    int colss = getCols();
 
     ds_course::Matrix<T> retmat(rowss, colss);
 
@@ -106,8 +120,8 @@ ds_course::Matrix<T> ds_course::Matrix<T>::operator-(const ds_course::Matrix<T> 
 
     }
 
-    rowss = getRows();
-    colss = getCols();
+    int rowss = getRows();
+    int colss = getCols();
 
     ds_course::Matrix<T> retmat(rowss, colss);
 
@@ -128,8 +142,8 @@ ds_course::Matrix<T> ds_course::Matrix<T>::operator*(const ds_course::Matrix<T> 
 
     }
 
-    rowss = getRows();
-    colss = rhs.cols;
+    int rowss = getRows();
+    int colss = rhs.cols;
 
     ds_course::Matrix<T> retmat(rowss, colss);
 
