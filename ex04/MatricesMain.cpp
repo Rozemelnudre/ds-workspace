@@ -199,7 +199,7 @@ int main(){
             try{
                 Matrix<double> result = m1 + m2;
                 cout << matrixType1 << " " << result.getRows() << " " << result.getCols() << endl;
-                cout << result;
+                cout << fixed << setprecision(5) << result;
             }catch (const std::out_of_range& e){
                 cout << "out_of_range" << endl;
             }
@@ -209,7 +209,7 @@ int main(){
             try{
                 Matrix<double> result = m1 - m2;
                 cout << matrixType1 << " " << result.getRows() << " " << result.getCols() << endl;
-                cout << result;
+                cout<< fixed << setprecision(5) << result;
             }catch (const std::out_of_range& e){
                 cout << "out_of_range" << endl;
             }
@@ -219,7 +219,7 @@ int main(){
             try{
                 Matrix<double> result = m1 * m2;
                 cout << matrixType1 << " " << result.getRows() << " " << result.getCols() << endl;
-                cout << result;
+                cout << fixed << setprecision(5) << result;
             }catch (const std::out_of_range& e){
                 cout << "out_of_range" << endl;
             }
