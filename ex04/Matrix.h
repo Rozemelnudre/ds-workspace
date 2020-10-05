@@ -146,13 +146,18 @@ ds_course::Matrix<T> ds_course::Matrix<T>::operator*(const ds_course::Matrix<T> 
     int rowss = getRows();
     int colss = rhs.cols;
 
+
+
     ds_course::Matrix<T> retmat(rowss, colss);
 
     for( int i = 0; i < rowss; i++){
         for (int j = 0; j < colss; j++){
+            retmat.a[i][j] = 0;
             for(int k = 0; k < getCols(); k++){
+
                 retmat.a[i][j] = retmat.a[i][j] + (a[i][k] * rhs.a[k][j]);
             }
+
         }
     }
 
