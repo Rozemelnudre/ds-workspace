@@ -1,14 +1,13 @@
 #include <iostream>
 #include <string>
 
-
-typedef string Elem;
+namespace ds_course{
 // element type
 class CNode {
 // circularly linked list node
 private:
  
- Elem elem;
+ int elem;
 // linked list element value
  CNode* next;
 // next item in the list
@@ -29,13 +28,13 @@ public:
 // destructor
  bool empty() const;
 // is list empty?
- const Elem& front() const;
+ const int& front() const;
 // element at cursor
- const Elem& back() const;
+ const int& back() const;
 // element following cursor
  void advance();
 // advance cursor
- void add(const Elem& e);
+ void add(const int& e);
 // add after cursor
  void remove();
 // remove node after cursor
@@ -44,3 +43,5 @@ private:
  CNode* cursor;
 // the cursor
 };
+
+}
