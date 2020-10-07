@@ -7,7 +7,7 @@ class CNode {
 // circularly linked list node
 private:
  
- int elem;
+int elem;
 // linked list element value
  CNode* next;
 // next item in the list
