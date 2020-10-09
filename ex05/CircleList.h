@@ -40,6 +40,9 @@ public:
 // remove node after cursor
 
 int getSize();
+
+std::string to_str() ;
+
 private:
  
  CNode* cursor;

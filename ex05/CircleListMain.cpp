@@ -12,13 +12,19 @@ class OutOfBoundsException {
 private:
 string message;
 public:
-string getMessage(){
-    return message;
-}
-OutOfBoundsException(const string& mesg):message(mesg){}
+string getMessage() const;
+OutOfBoundsException(const string& mesg);
 ~OutOfBoundsException();
 
 };
+
+OutOfBoundsException::OutOfBoundsException(const string& msg) { 
+    message = msg;
+    cout << "OutOfBoundsException" << endl; 
+    cerr << message << endl;
+}
+OutOfBoundsException::~OutOfBoundsException() { delete this; }
+string OutOfBoundsException::getMessage() const { return message; }
 
 void INS(CircleList& cl, int position, int value);
 void DEL(CircleList& cl, int position);
@@ -44,67 +50,41 @@ int main(){
     istringstream treeline(line);
     treeline >> elem;
     cl.add(elem);
-    cout << "added " << elem << endl;
 
     for(int i = 0; i < count - 1; i++){
         treeline >> elem;
         cl.add(elem);
-        cout << "added " << elem << endl;
         cl.advance();
         cursorposition++;
         cursorposition = cursorposition % count;
     }
 
-    cout << "list is made" << endl;
     cl.advance();
     cursorposition++;
     cursorposition = cursorposition % count;
-    cout << "count is " << count<< " and position " << cursorposition << " and size "  << cl.getSize()<< endl;
+   
 
     while(getline(cin, line)){
          istringstream treeline(line);
 
          treeline >> command;
-         cout <<  "am at the command" << endl;
 
          if(command == "DEL"){
             treeline >> commandposition;
-
-            try{
-                cout << "before del front is " << cl.front()  << " and back " << cl.back()<< endl;
-                DEL(cl, commandposition);
-                cout << "passed del and front is " << cl.front()  << " and back " << cl.back()<< endl;
-                count--;
-            }catch(const OutOfBoundsException& e){
-                cout << "OutOfBoundsException" << endl;
-            }
+            DEL(cl, commandposition);
+            count--;
            
             
 
          }else if(command == "INS"){
             treeline >> commandposition;
             treeline >> elem;
-            cout << "inserting " << elem << " at " << commandposition << endl;
-
-            try{
-                INS(cl, commandposition, elem);
-
-                cout << "now front in try block" << cl.front() << " and back  " << cl.back() << endl;
-                count++;
-                cout << "passes function ins" << endl;
-                cout<< cl.getSize() << " size is " << endl;
-                cout << cursorposition << "here curr posit" << endl;
-                cout<< cl.getSize() << " size is " << endl;
-            }catch(const OutOfBoundsException& e){
-                cout << "OutOfBoundsException" << endl;
-            }
-
-            cout << cursorposition << "here curr posit" << endl;
+            INS(cl, commandposition, elem);
+            count++;
          }
     }
 
     while(cursorposition != 0){
-        cout << "advancing" << endl;
         cl.advance();
         cursorposition++;
         cursorposition = cursorposition % count;
@@ -122,7 +102,6 @@ int main(){
 
 
     }
-
      
 
 }
@@ -130,12 +109,11 @@ int main(){
 
 void INS(CircleList& cl, int position, int value){
     int count = cl.getSize();
-    cout<< count << "inside of ins size is " << endl;
     int oneBeforePosition;
     int cursorposition = 0;
 
     if(position > count){
-        throw new OutOfBoundsException("unavailable position");
+        throw OutOfBoundsException("unavailable position");
     }
 
     if (position == 0){
@@ -144,7 +122,6 @@ void INS(CircleList& cl, int position, int value){
         oneBeforePosition = position - 1;
     }
 
-    cout << "onebeforepositionis " << oneBeforePosition << endl;
 
      while(cursorposition != oneBeforePosition){
         cl.advance();
@@ -153,20 +130,24 @@ void INS(CircleList& cl, int position, int value){
 
 
     }
-    cout << "inserting at cursposit " << cursorposition << endl;
 
     cl.add(value);
+    
+    if(position == 0){
+       cursorposition++; 
+    }
+    count++;
+
+    
 
     
     while(cursorposition != 0){
-        cout << "advancing" << endl;
         cl.advance();
         cursorposition++;
         cursorposition = cursorposition % count;
     }
-    cout << "after adding the position is " << cursorposition << endl;
 
-    cout << "now front " << cl.front() << " and back  " << cl.back() << endl;
+    cout <<cl.back() << " " << cl.front() << endl;
 
 
 }
@@ -176,8 +157,8 @@ void DEL(CircleList& cl, int position){
     int oneBeforePosition;
     int cursorposition = 0;
 
-     if(position > count){
-        throw new OutOfBoundsException("unavailable position");
+    if(position >= count){
+        throw OutOfBoundsException("unavailable position");
     }
 
     if (position == 0){
@@ -186,8 +167,6 @@ void DEL(CircleList& cl, int position){
         oneBeforePosition = position - 1;
     }
 
-    cout << "in del onebefore is " << oneBeforePosition << endl;
-
             
     while(cursorposition != oneBeforePosition){
         cl.advance();
@@ -195,21 +174,22 @@ void DEL(CircleList& cl, int position){
         cursorposition = cursorposition % count;
 
     }
-    cout << "before delete cursorposition is " << cursorposition << endl;
 
 
     cl.remove();
+    if(position == 0){
+       cursorposition--; 
+    }
     count --;
+    
+    
 
     
     while(cursorposition != 0){
-        cout << "advancing" << endl;
         cl.advance();
         cursorposition++;
         cursorposition = cursorposition % count;
     }
-
-    cout << "after deleting the position is " << cursorposition << endl;
 
 }
 

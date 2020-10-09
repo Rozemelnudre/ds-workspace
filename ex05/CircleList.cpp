@@ -70,9 +70,7 @@ bool CircleList::empty() const {
 
 int CircleList::getSize(){
     int counter = 1;
-    cout << "inside" << endl;
     int elem = front();
-    cout << front() << " is frony " << endl;
     advance();
 
     while(front() != elem){
@@ -80,4 +78,23 @@ int CircleList::getSize(){
         counter++;
     }
     return counter;
+}
+
+string CircleList::to_str() {
+
+    if(cursor == NULL){
+        return "";
+    }
+    int count = getSize();
+    string toreturn = "";
+
+    for( int i = 0; i < count; i++){
+        advance();
+        toreturn += to_string(back());
+        if( i != count - 1){
+            toreturn += " ";
+        }
+    }
+
+    return toreturn;
 }
