@@ -9,7 +9,7 @@ using namespace ds_course;
 using namespace std;
 
 void CircleList::add(const int& e){
-    cout << "adding"<< endl;
+
     
     CNode* newelem = new CNode;
     newelem->elem = e;
@@ -17,12 +17,12 @@ void CircleList::add(const int& e){
        
         newelem->next = newelem;
          cursor = newelem;
-        cout << "added first elem"<< endl;
+        
     }else{
-        cout << "at adding" << endl;
+    
         newelem->next = cursor->next;
         cursor->next = newelem;
-        cout << "ater adding" << endl;
+    
     }
     
 
@@ -66,4 +66,18 @@ const int& CircleList::back() const{
 
 bool CircleList::empty() const { 
     return cursor == NULL; 
+}
+
+int CircleList::getSize(){
+    int counter = 1;
+    cout << "inside" << endl;
+    int elem = front();
+    cout << front() << " is frony " << endl;
+    advance();
+
+    while(front() != elem){
+        advance();
+        counter++;
+    }
+    return counter;
 }

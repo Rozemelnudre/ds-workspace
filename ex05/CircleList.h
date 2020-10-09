@@ -38,6 +38,8 @@ public:
 // add after cursor
  void remove();
 // remove node after cursor
+
+int getSize();
 private:
  
  CNode* cursor;
