@@ -24,15 +24,19 @@ int main(){
     int counter = 0;
     Node* forest[10000];
     int frstcnt = 0;
+   
     
     while(getline(cin, line)){
         istringstream inputLine(line);
+
+        
         
 
         inputLine >> command;
         //cout << "right now doing " << command << endl;
 
         if(command == "T"){
+           
             inputLine >> data;
             //cout << "Adding ancestor with val " << data << endl;
             bool isUniqueRoot = true;
@@ -43,7 +47,7 @@ int main(){
                 }
             }
             if(!isUniqueRoot){
-                cout << "error6 \n";
+                cout << "error6\n";
                 continue;
             }
             newNode = new Node(data);
@@ -54,6 +58,7 @@ int main(){
             counter ++;
 
         }else if(command == "L"){
+            
 
             bool leftChildExists = false;
             bool parentHasChild = false;
@@ -61,10 +66,10 @@ int main(){
             
             inputLine >> parentval;
             inputLine >> data;
-            //cout << "trying to add "<< parentval << " to " << data << endl;
+            //cout << "trying to add left "<< data << " to " << parentval << endl;
 
             if(parentval == data){
-                cout << "error1 \n";
+                cout << "error1\n";
                 continue;
             }
 
@@ -78,14 +83,14 @@ int main(){
 
 
             for(int i = 0; i < counter; i++){
-
+                
                 if(nodesAdded[i]->value == parentval){
+
+                    leftParentFound = true;
 
                     if(nodesAdded[i]->leftChild != NULL){
                         parentHasChild = true;
                         break;
-                    }else{
-                        leftParentFound = true;
                     }
                    
 
@@ -99,24 +104,22 @@ int main(){
                        nodesAdded[i]->addLeftChild(newNode); 
                        nodesAdded[counter] = newNode;
                        counter ++;
+                        break;
                     }
-                    
-
-                    nodesAdded[counter] = newNode;
-                    counter ++;
-                    break;
+                   
                 }
             }
             if(leftParentFound == false){
-                cout << "error2 \n";
+                cout << "error2\n";
             }else if(leftChildExists){
-                cout << "error3 \n";
+                cout << "error3\n";
             }else if(parentHasChild){
-                cout << "error4 \n";
+                cout << "error4\n";
             }
            
 
         }else if(command == "R"){
+          
             bool rightChildExists = false;
             bool rParentHasChild = false;
             bool rightParentFound = false;
@@ -126,7 +129,7 @@ int main(){
             //cout << "trying to add "<< data << " to " << parentval << endl;
 
             if(parentval == data){
-                cout << "error1 \n";
+                cout << "error1\n";
                 continue;
             }
 
@@ -140,6 +143,7 @@ int main(){
 
             for(int i = 0; i < counter; i++){
                 if(nodesAdded[i]->value == parentval){
+                    rightParentFound = true;
 
                     if(nodesAdded[i]->rightChild != NULL){
                         //cout << "rightChild full" << endl;
@@ -166,15 +170,16 @@ int main(){
                 }
             }
             if(!rightParentFound){
-              cout << "error2 \n";  
-            }else if(rParentHasChild){
-                cout << "error3 \n";
+              cout << "error2\n";  
             }else if(rightChildExists){
-                cout << "error5";
+                cout << "error3\n";
+            }else if(rParentHasChild){
+                cout << "error5\n";
             }
             
 
         }else if(command == "?"){
+           
             inputLine >>data;
             //cout << "searching for " << data << endl;
             bool found = false;
@@ -192,12 +197,13 @@ int main(){
                 }
             }
             if(!found){
-                cout << "error0 \n";
+                //cout << "did not find " << data << endl;
+                cout << "error0\n";
                 continue;
             }
             if(trcount == 1){
                 if(traversal[0] == data){
-                   cout << "0 0 \n" ; 
+                   cout << "0 0\n" ; 
                 }else{
                     /*throw some error*/
                 }
@@ -213,13 +219,14 @@ int main(){
                         }
 
                         if(i == trcount -1){
-                            cout << "0 \n";
+                            cout << "0\n";
                         }else{
                             cout << traversal[i+1] << "\n";
                         }
                     }
                 }  
             }
+          
            
         }
 
