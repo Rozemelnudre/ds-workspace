@@ -1,48 +1,56 @@
-#include "TreeNode.cpp"
+#include "TreeNode.h"
 #include <string.h>
 
 using namespace std;
 using namespace ds_workspace;
 
-void reverseStr(string& str) { 
+string reverseStr(string str) { 
+    string swapped = str;
     int n = str.length(); 
-    for (int i = 0; i < n / 2; i++) 
-        swap(str[i], str[n - i - 1]); 
+    for (int i = 0; i < n / 2; i++) {
+        swap(swapped[i], swapped[n - i - 1]); 
+    }
+    return swapped;
+        
 }
 
 
-Node* compare(Node* first, Node* second, int mode){
-    Node* max;
+string compare(string first, string second, int mode){
+    string max = "stub";
     if(mode == 0){
         /*lex*/
-        if(first->key <= second->key){
+        if(first < second){
             return first;
-        }else{
+        }else if(first > second){
            return second;
         }
     }else if(mode == 1){
         /*shortlex*/
-        if(first->key.length() < second->key.length()){
+        if(first.length() < second.length()){
             return first;
-        }else if(first->key.length() == second->key.length()){
-            if(first->key <= second->key){
+        }else if(first.length() == second.length()){
+            if(first < second){
                 return first;
-            }else{
+            }else if(first > second){
                 return second;
             }
         }else{
             return second;
         }
     }else if(mode == 2){
-        reverseStr(first->key);
-        reverseStr(second->key);
+        string firstSwap;
+        string secSwap;
+        firstSwap = reverseStr(first);
+        secSwap = reverseStr(second);
+        
 
-        if(first->key <= second->key){
+        if(firstSwap < secSwap){
             return first;
-        }else{
+        }else if(firstSwap > secSwap){
            return second;
         }
         /*colex*/
     }
+    return max;
 }
 
