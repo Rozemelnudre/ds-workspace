@@ -18,9 +18,19 @@ Node* rightRotate(Node* y);
 Node* leftRotate(Node* x);
 void inOrderTraversal(Node* root);
 Node * minValueNode(Node* node);
-int get(string key, Node* root, int mode);
+void gett(string key, Node* root, int mode);
 Node* deleteNode(Node* root, string key,int mode);
 string locate(string key, Node* root, int mode);
+void dump(string start, string end, int mode);
+void inOrderTraversalPrint(Node* root);
+
+int getNode(string key, Node* root, int mode);
+
+
+int inOrderCounter = 0;
+Node* inOrder[100];
+
+Node* gotNode = NULL;
 
 
 int main(){
@@ -29,11 +39,15 @@ int main(){
     string command;
     string word;
     string modeCom;
+    string start;
+    string end;
     int mode;
+    int lineCounter = 0;
     Node* root = NULL;
     getline(cin, line);
     istringstream inputLine(line);
     inputLine >> modeCom;
+    lineCounter++;
     if(modeCom == "COLEX"){
         mode = 2;
     }else if(modeCom == "LEX"){
@@ -42,10 +56,11 @@ int main(){
         mode = 1;
     }
 
-    cout << "the mode is " << modeCom << endl;
+    //cout << "the mode is " << modeCom << endl;
 
     while(getline(cin, line)){
         istringstream inputLine(line);
+        lineCounter++;
 
         
         
@@ -57,37 +72,75 @@ int main(){
 
             /*insert all words on the line*/
             while(inputLine >> word){
-                cout << "inserting word " << word << endl;
+
+                
+               
+                
+                
+                
                 if(root == NULL){
 
                     root = new Node(word);
+
                 }else{
-                  root = bstInsert(word,root, mode);
+  
+                    gett(word,root,mode);
+                    if(gotNode == NULL){
+                        root = bstInsert(word,root, mode);
+                    }else{
+                        gotNode->baddness++;
+                    }
                 }
 
-                //cout << "root is " << root->key << " balance is " << getBalance(root)<< endl;
-                //cout << "root left is " << root->left->key << endl;
-                //cout << "root right is " << root->right->key << endl;
+                
 
-                inOrderTraversal(root);
                 
             }
            
         }else if(command == "E"){
+
+
+            while(inputLine >> word){
+                //cout << "erasing word " << word << endl;
+                /*if node present delete*/
+                gett(word,root,mode);
+                if(gotNode != NULL){
+                    root = deleteNode(root,word,mode);
+                }
+            }
             
 
 
         }else if(command == "G"){
-          
+          inputLine >> word;
+         gett(word,root,mode);
+         //cout << "getting word " << word << endl;
+         cout << lineCounter << " ";
+         if(gotNode != NULL){
+            cout << "(" <<  gotNode->key << ", " << gotNode->baddness << ")" << endl;
+         }else{
+             cout << "(" <<  word << ", " << 0 << ")" << endl;
+         }
          
 
         }else if(command == "L"){
             inputLine >> word;
+            //cout << "locating word " << word << endl;
+            cout << lineCounter << " ";
             cout << locate(word, root, mode) << endl;
            
           
            
         }else if (command == "D"){
+            inputLine >> start;
+            inputLine>> end;
+            //cout << "dumping from " << start << " to " << end << endl;
+            inOrderCounter = 0;
+            inOrderTraversal(root);
+            cout << lineCounter;
+            dump(start, end,mode);
+            cout << endl;
+
             
         }
 
@@ -101,13 +154,13 @@ Node* bstInsert(string key, Node* root, int mode){
     if(root == NULL){
         return new Node(key);
     }else if( compare(key, root->key, mode) == key){
-        //cout << "adding left child " << endl;
+     
         /*if the key is less than root move left or add left child if it is empty*/
         root->left = bstInsert(key, root->left,mode);
         
 
     }else if(compare(key, root->key, mode) == root->key){
-        //cout << "adding right child " << endl;
+        
         /*if the key is larger than root move right or add right child if it is empty*/
 
         root->right = bstInsert(key, root->right,mode);
@@ -121,37 +174,41 @@ Node* bstInsert(string key, Node* root, int mode){
     root->height = 1 + max(height(root->left),height(root->right)); 
     int balance;
     balance = getBalance(root);
-     //cout << "node is " << root->key << " balance is " << getBalance(root)<< endl;
-
+     
     /*check the balance factor for the currrent node or root. because of recursion this should be also checked for
     all nodes up to the root*/ 
    // cout << "key is " << endl;
         if (balance > 1 && compare(key,root->left->key,mode) == key){
-            //cout << "doing rightRotate" << endl;
+           
            return rightRotate(root);   
         } 
         
   
     // Right Right Case  
-    if (balance < -1 && compare(key,root->right->key,mode) == root->right->key)  
-        return leftRotate(root);  
+    if (balance < -1 && compare(key,root->right->key,mode) == root->right->key){
+    
+        return leftRotate(root); 
+    } 
+         
   
     // Left Right Case  
     if (balance > 1 && compare(key,root->left->key,mode) == root->left->key)  
     {  
-        //cout << "doing leftRotate" << endl;
+       
+      
         root->left = leftRotate(root->left);  
+        //cout << root->left->left->key << " " << root->left->key << endl;
         return rightRotate(root);  
     }  
   
     // Right Left Case  
     if (balance < -1 && compare(key,root->right->key,mode) == key)  
     {  
+   
         root->right = rightRotate(root->right);  
         return leftRotate(root);  
     }  
 
-    /*if necessary do rotation*/
     return root;
 }
 
@@ -197,6 +254,8 @@ Node* rightRotate(Node* y)
     // Update heights  
     y->height = max(height(y->left),height(y->right)) + 1;  
     x->height = max(height(x->left),height(x->right)) + 1;  
+
+    
   
     // Return new root  
     return x;  
@@ -225,15 +284,26 @@ Node* leftRotate(Node* x)
 
 /*print inorder*/
 
+void inOrderTraversalPrint(Node* root){
+    if(root->left != NULL){
+        inOrderTraversalPrint(root->left);
+    }
+    cout << "(" << root->key << ", " << root->baddness << ")" << endl;
+    if(root->right != NULL){
+        inOrderTraversalPrint(root->right);
+    }
+
+}
+
 void inOrderTraversal(Node* root){
     if(root->left != NULL){
         inOrderTraversal(root->left);
     }
-    cout << "(" << root->key << ", " << root->baddness << ")" << endl;
+    inOrder[inOrderCounter] = root;
+    inOrderCounter++;
     if(root->right != NULL){
         inOrderTraversal(root->right);
     }
-
 }
 
 /*deleting function*/
@@ -254,15 +324,17 @@ Node* deleteNode(Node* root, string key,int mode)  {
         return root;  
   
     // If the key is smaller than the root key move left 
-    if (compare(key,root->key,mode) ==  key)  
+    if (compare(key,root->key,mode) ==  key && key != root->key) {
+        //cout << "moving left" << endl;
         root->left = deleteNode(root->left, key, mode);  
   
     // If the key is larger than the root key, then move right
-    else if( compare(key,root->key,mode) == root->key )  
+    }else if( compare(key,root->key,mode) == root->key && key != root->key){
+        //cout << "moving right" << endl;
         root->right = deleteNode(root->right, key, mode);  
   
     // if key is the same this is the node to be deleted  
-    else
+    }else
     {  
         // node with only one child or no child  
         if( (root->left == NULL) || 
@@ -288,13 +360,16 @@ Node* deleteNode(Node* root, string key,int mode)  {
         }  
         else
         {  
+           
             // node with two children: Get the inorder  
             // successor (smallest in the right subtree)  
             Node* temp = minValueNode(root->right);  
+           //cout << "deletion" << endl;
   
             // Copy the inorder successor's  
             // data to this node  
             root->key = temp->key;  
+            root->baddness = temp->baddness;
   
             // Delete the inorder successor  
             root->right = deleteNode(root->right,temp->key, mode);  
@@ -342,15 +417,21 @@ Node* deleteNode(Node* root, string key,int mode)  {
 
 /*get*/
 
-int get(string key, Node* root, int mode){
+void gett(string key, Node* root, int mode){
+    gotNode = NULL;
     if (root->key == key){
-        return root->baddness;
+        gotNode = root;
     }else if(compare(root->key,key,mode) == key){
-        return get(key,root->left,mode);
+        if(root->left != NULL){
+          gett(key,root->left,mode);  
+        }
+        
     }else{
-        return get(key, root->right,mode);
+        if(root->right != NULL){
+          gett(key, root->right,mode);  
+        }
+        
     }
-    return 0;
 }
 
 /*locate*/
@@ -363,16 +444,12 @@ string locate(string key, Node* root, int mode){
             found = 1;
             return path;
         }else if(compare(current->key,key,mode) == key){
-            cout << "moving left, key is and root is " << key << " " << current->key << endl;
-            cout << "path before " << path << endl;
             path += "L";
-            cout << "path after " << path << endl;
+            
             current = current->left;
         }else{
-            cout << "moving right, key is and root is " << key << " " << current->key << endl;
-            cout << "path before " << path << endl;
             path += "R";
-            cout << "path after " << path << endl;
+           
             current = current->right;
         }
     }
@@ -383,5 +460,38 @@ string locate(string key, Node* root, int mode){
 }
 
 /*dump*/
+
+void dump(string start, string end, int mode){
+    //cout << "inorder counter is " << inOrderCounter << endl;
+    if(start == "_" && end == "_"){ 
+        
+        for (int i = 0; i < inOrderCounter; i++){
+            cout << " (" << inOrder[i]->key << ", " << inOrder[i]->baddness << ")";
+        }
+    }else if(start == "_"){
+        for (int i = 0; i < inOrderCounter; i++){
+            if(compare(inOrder[i]->key, end, mode) == inOrder[i]->key){
+              cout << " (" << inOrder[i]->key << ", " << inOrder[i]->baddness << ")";  
+            }
+            
+        }
+    }else if(end == "_"){
+        for (int i = 0; i < inOrderCounter; i++){
+            if(compare(inOrder[i]->key, start, mode) == start){
+              cout << " (" << inOrder[i]->key << ", " << inOrder[i]->baddness << ")";  
+            }
+            
+        }
+    }else{
+        /*start and end are both normal*/
+         for (int i = 0; i < inOrderCounter; i++){
+            if(compare(inOrder[i]->key, start, mode) == start && compare(inOrder[i]->key, end, mode) == inOrder[i]->key){
+              cout << " (" << inOrder[i]->key << ", " << inOrder[i]->baddness << ")";  
+            }
+            
+        }
+
+    }
+}
 
 /*finding function */

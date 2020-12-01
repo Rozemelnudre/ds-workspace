@@ -20,7 +20,7 @@ namespace ds_workspace{
                 left = NULL;
                 right = NULL;
                 /*or is the height 1?*/
-                height = 0;
+                height = 1;
                 baddness = 1;
             }
             ~Node();
