@@ -28,7 +28,7 @@ int getNode(string key, Node* root, int mode);
 
 
 int inOrderCounter = 0;
-Node* inOrder[100];
+Node* inOrder[10000];
 
 Node* gotNode = NULL;
 
@@ -117,9 +117,9 @@ int main(){
          //cout << "getting word " << word << endl;
          cout << lineCounter << " ";
          if(gotNode != NULL){
-            cout << "(" <<  gotNode->key << ", " << gotNode->baddness << ")" << endl;
+            cout << "(" <<  gotNode->key << "," << gotNode->baddness << ")" << endl;
          }else{
-             cout << "(" <<  word << ", " << 0 << ")" << endl;
+             cout << "(" <<  word << "," << 0 << ")" << endl;
          }
          
 
@@ -466,19 +466,20 @@ void dump(string start, string end, int mode){
     if(start == "_" && end == "_"){ 
         
         for (int i = 0; i < inOrderCounter; i++){
-            cout << " (" << inOrder[i]->key << ", " << inOrder[i]->baddness << ")";
+            cout << " (" << inOrder[i]->key << "," << inOrder[i]->baddness << ")";
         }
     }else if(start == "_"){
         for (int i = 0; i < inOrderCounter; i++){
             if(compare(inOrder[i]->key, end, mode) == inOrder[i]->key){
-              cout << " (" << inOrder[i]->key << ", " << inOrder[i]->baddness << ")";  
+              cout << " (" << inOrder[i]->key << "," << inOrder[i]->baddness << ")";  
             }
             
         }
     }else if(end == "_"){
         for (int i = 0; i < inOrderCounter; i++){
             if(compare(inOrder[i]->key, start, mode) == start){
-              cout << " (" << inOrder[i]->key << ", " << inOrder[i]->baddness << ")";  
+                //cout << "i and start and mmode  is " << i << " " << start << " " << mode << endl;
+              cout << " (" << inOrder[i]->key << "," << inOrder[i]->baddness << ")";  
             }
             
         }
@@ -486,7 +487,7 @@ void dump(string start, string end, int mode){
         /*start and end are both normal*/
          for (int i = 0; i < inOrderCounter; i++){
             if(compare(inOrder[i]->key, start, mode) == start && compare(inOrder[i]->key, end, mode) == inOrder[i]->key){
-              cout << " (" << inOrder[i]->key << ", " << inOrder[i]->baddness << ")";  
+              cout << " (" << inOrder[i]->key << "," << inOrder[i]->baddness << ")";  
             }
             
         }
