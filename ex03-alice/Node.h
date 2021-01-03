@@ -1,3 +1,6 @@
+#ifndef DS_NODE_ALICE
+#define DS_NODE_ALICE
+
 #include <vector>
 
 using namespace std;
@@ -20,3 +23,5 @@ struct Node{
 
 };
 }
+
+#endif
