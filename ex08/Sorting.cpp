@@ -3,6 +3,9 @@
 
 using namespace std;
 using namespace ds_workspace;
+string compare1(string first, string second, int mode);
+string compare2(string first, string second, int mode);
+string compare(string first, string second, int mode);
 
 string reverseStr(string str) { 
     string swapped = str;
