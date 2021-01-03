@@ -1,3 +1,7 @@
+#ifndef DS_CIRCLELIST
+#define DS_CIRCLELIST
+
+
 #include <iostream>
 #include <string>
 
@@ -50,3 +54,4 @@ private:
 };
 
 }
+#endif
