@@ -1,5 +1,5 @@
-#ifndef DS_NODE
-#define DS_NODE
+#ifndef DS_TREE_NODE
+#define DS_TREE_NODE
 
 #include <string>
 #include <sstream>
